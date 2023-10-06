@@ -5,7 +5,7 @@ ls /usr/share/data-minor-bioinf/assembly/* | xargs -tI{} ln -s {}
 SEED=727  
 seqtk sample -s$SEED oil_R1.fastq 5000000 > R1_PE.fastq  
 seqtk sample -s$SEED oil_R2.fastq 5000000 > R1_PE.fastq  
-seqtk sample -s$SEED oilMP_S4_L001_R1_001.fastq 1500000 > R1_MP.fastq  
+seqtk sample -s$SEED oilMP_S4_L001_R1_001.fastq 1500000 > R1_MP.fastq   
 seqtk sample -s$SEED oilMP_S4_L001_R2_001.fastq 1500000 > R1_MP.fastq  
 **3. Оценка чтений используя FastQC**    
 mkdir fastqc  
