@@ -10,7 +10,7 @@ seqtk sample -s$SEED oilMP_S4_L001_R2_001.fastq 1500000 > MP2.fastq
 **3. Оценка чтений используя FastQC**    
 mkdir fastqc  
 ls PE* MP* | xargs -tI{} fastqc -o fastqc {}  
-**4. Создание отчета через MultiQC**  
+**4. Создание отчета через MultiQC**   
 mkdir multiqc  
 multiqc -o multiqc fastqc  
 **5. Обрезание чтений**  
