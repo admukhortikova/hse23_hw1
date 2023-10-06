@@ -44,6 +44,6 @@ time platanus assemble -o Poil -f trimmed_fastq/R1_PE.fastq.trimmed trimmed_fast
 ![image6](https://github.com/admukhortikova/hse23_hw1/assets/146677685/bf228439-ca03-4c81-8019-770ad60fae10)  
 ![image7](https://github.com/admukhortikova/hse23_hw1/assets/146677685/3fa2c88f-368d-4e66-a836-c1ae237f0c06)  
 ![image8](https://github.com/admukhortikova/hse23_hw1/assets/146677685/1b8e585b-2180-45d4-aa53-89ae66e2c718)  
-14. **Ссылка на коллаб**  
+**14. Ссылка на коллаб**
 https://colab.research.google.com/drive/1hIsPEP_47Y25W-5LBR9-rXT0MCuDxwCx?authuser=0#scrollTo=hgwHyVfc-NZV
 
