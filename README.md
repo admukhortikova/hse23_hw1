@@ -29,7 +29,7 @@ time platanus assemble -o Poil -f trimmed_fastq/R1_PE.fastq.trimmed trimmed_fast
 **10. Сбор скаффолдов**      
 time platanus scaffold -o Poil -c Poil_contig.fa -IP1 trimmed_fastq/R1_PE.fastq.trimmed trimmed_fastq/R2_PE.fastq.trimmed -OP2 trimmed_fastq/R1_MP.fastq.int_trimmed trimmed_fastq/R2_MP.fastq.int_trimmed 2> scaffold.log &    
 echo scaffold1_len3834389_cov231 > scaffold_name.txt    
-seqtk subseq Poil_scaffold.fa scaffold_name.txt > longest_scaffold.fna
+seqtk subseq Poil_scaffold.fa scaffold_name.txt > longest_scaffold.fna  
 **11. Gap_close**    
 time platanus gap_close -o Poil -c Poil_scaffold.fa -IP1 trimmed_fastq/R1_PE.fastq.trimmed  trimmed_fastq/R2_PE.fastq.trimmed -OP2 trimmed_fastq/R1_MP.fastq.int_trimmed trimmed_fastq/R2_MP.fastq.int_trimmed 2> gapclose.log &    
 echo scaffold1_cov231 > longest_scaffold_gapclosed.txt    
