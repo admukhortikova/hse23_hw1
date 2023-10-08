@@ -3,35 +3,35 @@
 ls /usr/share/data-minor-bioinf/assembly/* | xargs -tI{} ln -s {}  
 **2. Выбор случайныйх чтений**    
 SEED=727  
-seqtk sample -s$SEED oil_R1.fastq 5000000 > PE1.fastq  
-seqtk sample -s$SEED oil_R2.fastq 5000000 > PE2.fastq  
-seqtk sample -s$SEED oilMP_S4_L001_R1_001.fastq 1500000 > MP1.fastq   
-seqtk sample -s$SEED oilMP_S4_L001_R2_001.fastq 1500000 > MP2.fastq  
+seqtk sample -s$SEED oil_R1.fastq 5000000 > R1_PE.fastq  
+seqtk sample -s$SEED oil_R2.fastq 5000000 > R2_PE.fastq  
+seqtk sample -s$SEED oilMP_S4_L001_R1_001.fastq 1500000 > R1_MP.fastq   
+seqtk sample -s$SEED oilMP_S4_L001_R2_001.fastq 1500000 > R2_MP.fastq  
 **3. Оценка чтений используя FastQC**    
 mkdir fastqc  
-ls PE* MP* | xargs -tI{} fastqc -o fastqc {}  
+ls *.fastq | xargs -P 4 -tI{} fastqc -o fastqc {} 
 **4. Создание отчета через MultiQC**   
 mkdir multiqc  
 multiqc -o multiqc fastqc  
 **5. Обрезание чтений**  
-platanus_trim PE*  
-platanus_internal_trim ME*  
+platanus_trim R1_PE.fastq R2_PE.fastq  
+platanus_internal_trim R1_MP.fastq R2_MP.fastq  
 **6. Удаление изначальных файлов**  
 rm *.fastq  
 **7. Оценка качества обрезанных чтений используя FastQC**  
-mkdir fastqc_trimmed    
-ls PE* ME*| xargs -tI{} fastqc -o fastqc_trimmed {}  
+mkdir trimmed_fastqc   
+ls trimmed_fastq/* | xargs -P 4 -tI{} fastqc -o trimmed_fastqc {}
 **8. Создание отчета для обрезанных чтений через MultiQC**  
-mkdir multiqc_trimmed  
-multiqc -o multiqc_trimmed fastqc_trimmed  
+mkdir trimmed_multiqc 
+multiqc -o trimmed_multiqc trimmed_fastqc  
 **9. Сбор контиг**  
-time platanus assemble -o Poil -f trimmed_fastq/PE1.fastq.trimmed trimmed_fastq/PE2.fastq.trimmed 2> assemble.log &    
+time platanus assemble -o Poil -f trimmed_fastq/R1_PE.fastq.trimmed trimmed_fastq/R2_PE.fastq.trimmed 2> assemble.log &    
 **10. Сбор скаффолдов**      
-1)time platanus scaffold -o Poil -c Poil_contig.fa -IP1 trimmed_fastq/PE1.fastq.trimmed trimmed_fastq/PE2.fastq.trimmed -OP2 trimmed_fastq/MP1.fastq.int_trimmed trimmed_fastq/MP2.fastq.int_trimmed 2> scaffold.log &    
+1)time platanus scaffold -o Poil -c Poil_contig.fa -IP1 trimmed_fastq/R1_PE.fastq.trimmed trimmed_fastq/R2_PE.fastq.trimmed -OP2 trimmed_fastq/R1_MP.fastq.int_trimmed trimmed_fastq/R2_MP.fastq.int_trimmed 2> scaffold.log &   
 2)echo scaffold1_len3834389_cov231 > scaffold_name.txt    
 3)seqtk subseq Poil_scaffold.fa scaffold_name.txt > longest_scaffold.fna  
 **11. Gap_close**    
-1)time platanus gap_close -o Poil -c Poil_scaffold.fa -IP1 trimmed_fastq/PE1.fastq.trimmed  trimmed_fastq/PE2.fastq.trimmed -OP2 trimmed_fastq/MP1.fastq.int_trimmed trimmed_fastq/MP2.fastq.int_trimmed 2> gapclose.log &    
+1)time platanus gap_close -o Poil -c Poil_scaffold.fa -IP1 trimmed_fastq/R1_PE.fastq.trimmed  trimmed_fastq/R2_PE.fastq.trimmed -OP2 trimmed_fastq/R1_MP.fastq.int_trimmed trimmed_fastq/R2_MP.fastq.int_trimmed 2> gapclose.log &   
 2)echo scaffold1_cov231 > longest_scaffold_gapclosed.txt    
 3)seqtk subseq Poil_gapClosed.fa longest_scaffold_gapclosed.txt > longest_scaffold_gapclosed.fna  
 **12. Не trimmed**    
