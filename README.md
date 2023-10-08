@@ -47,6 +47,8 @@ time platanus assemble -o Poil -f trimmed_fastq/PE1.fastq.trimmed trimmed_fastq/
 **14. Ссылка на коллаб**  
 https://colab.research.google.com/drive/1hIsPEP_47Y25W-5LBR9-rXT0MCuDxwCx?authuser=0#scrollTo=hgwHyVfc-NZV  
 **15. Бонусная часть**  
-Команды те же самые, только взяла 500 тысяч чтений типа paired-end и 150 тысяч чтений типа mate-pairs
+1) Команды те же самые, только взяла 500 тысяч чтений типа paired-end и 150 тысяч чтений типа mate-pairs//
+2) Коллаб бонусной части:
+https://colab.research.google.com/drive/1F-IQGnX9Wq6fzFO3FF1_jbwS01yL1eP_?usp=sharing
    
 
