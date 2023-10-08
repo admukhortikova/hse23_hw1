@@ -20,7 +20,7 @@ platanus_internal_trim R1_MP.fastq R2_MP.fastq
 rm *.fastq  
 **7. Оценка качества обрезанных чтений используя FastQC**  
 mkdir trimmed_fastqc   
-ls trimmed_fastq/* | xargs -P 4 -tI{} fastqc -o trimmed_fastqc {}
+ls trimmed_fastq/* | xargs -P 4 -tI{} fastqc -o trimmed_fastqc {}  
 **8. Создание отчета для обрезанных чтений через MultiQC**  
 mkdir trimmed_multiqc 
 multiqc -o trimmed_multiqc trimmed_fastqc  
